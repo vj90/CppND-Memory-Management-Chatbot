@@ -11,7 +11,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+    // TODO is this destructor required?
 
     ////
     //// EOF STUDENT CODE
