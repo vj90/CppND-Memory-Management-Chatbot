@@ -41,6 +41,14 @@ public:
 
     // communication
     void ReceiveMessageFromUser(std::string message);
+  // Assignment constructor
+  ChatBot &operator=(const Chatbot &source);
+  // Copy constructor
+  ChatBot(const Chatbot &source);
+  // Move constructor
+  ChatBot(MyMovableClass &&source);
+  // Move assignment constructor
+  Chatbot &operator=(Chatbot &&source);
 };
 
 #endif /* CHATBOT_H_ */
