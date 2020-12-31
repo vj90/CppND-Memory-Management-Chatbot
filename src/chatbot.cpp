@@ -20,9 +20,7 @@ ChatBot::ChatBot() {
 ChatBot::ChatBot(std::string filename) {
   std::cout << "ChatBot Constructor" << std::endl;
 
-  // invalidate data handles
-  _chatLogic = nullptr;
-  _rootNode = nullptr;
+  invalidateDataHandles();
 
   // load image into heap memory
   _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
@@ -32,7 +30,17 @@ ChatBot::~ChatBot() {
   std::cout << "ChatBot Destructor" << std::endl;
 
   // deallocate heap memory
-  if (_image != NULL)  // Attention: wxWidgets used NULL and not nullptr
+  deleteImageIfNotNull();
+}
+
+void ChatBot::invalidateDataHandles() {
+  _chatLogic = nullptr;
+  _rootNode = nullptr;
+  _image = nullptr;
+}
+
+void ChatBot::deleteImageIfNotNull() {
+  if (_image)  // Attention: wxWidgets used NULL and not nullptr
   {
     delete _image;
     _image = NULL;

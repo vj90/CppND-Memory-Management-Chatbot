@@ -20,6 +20,10 @@ class ChatBot {
   // proprietary functions
   int ComputeLevenshteinDistance(std::string s1, std::string s2);
 
+  // helpers
+  void invalidateDataHandles();
+  void deleteImageIfNotNull();
+
  public:
   // constructors / destructors
   ChatBot();                      // constructor WITHOUT memory allocation
