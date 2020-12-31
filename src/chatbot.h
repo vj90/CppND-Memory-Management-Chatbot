@@ -30,13 +30,13 @@ class ChatBot {
   ChatBot(std::string filename);  // constructor WITH memory allocation
   ~ChatBot();
   // Assignment constructor
-  ChatBot &operator=(const Chatbot &source);
+  ChatBot &operator=(const ChatBot &source);
   // Copy constructor
-  ChatBot(const Chatbot &source);
+  ChatBot(const ChatBot &source);
   // Move constructor
-  ChatBot(MyMovableClass &&source);
+  ChatBot(ChatBot &&source);
   // Move assignment constructor
-  Chatbot &operator=(Chatbot &&source);
+  ChatBot &operator=(ChatBot &&source);
 
   //// STUDENT CODE
   ////

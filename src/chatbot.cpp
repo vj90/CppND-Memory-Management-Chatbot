@@ -47,6 +47,48 @@ void ChatBot::deleteImageIfNotNull() {
   }
 }
 
+// Assignment constructor
+ChatBot &ChatBot::operator=(const ChatBot &source) {
+  std::cout << "ChatBot Assignment Constructor" << std::endl;
+  if (this == &source) {
+    return *this;
+  }
+  deleteImageIfNotNull();
+  _image = new wxBitmap();
+  *_image = *(source._image);
+  _rootNode = source._rootNode;
+  _chatLogic = source._chatLogic;
+}
+
+// Copy constructor
+ChatBot::ChatBot(const ChatBot &source) {
+  std::cout << "ChatBot Copy Constructor" << std::endl;
+  _image = new wxBitmap();
+  *_image = *(source._image);
+  _rootNode = source._rootNode;
+  _chatLogic = source._chatLogic;
+}
+// Move constructor
+ChatBot::ChatBot(ChatBot &&source) {
+  std::cout << "ChatBot Move Constructor" << std::endl;
+  _image = source._image;
+  _rootNode = source._rootNode;
+  _chatLogic = source._chatLogic;
+  source.invalidateDataHandles();
+}
+// Move assignment constructor
+ChatBot &ChatBot::operator=(ChatBot &&source) {
+  std::cout << "ChatBot Move Assignment Constructor" << std::endl;
+  if (this == &source) {
+    return *this;
+  }
+  deleteImageIfNotNull();
+  _image = source._image;
+  _rootNode = source._rootNode;
+  _chatLogic = source._chatLogic;
+  source.invalidateDataHandles();
+}
+
 //// STUDENT CODE
 ////
 
