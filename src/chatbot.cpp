@@ -75,6 +75,7 @@ ChatBot::ChatBot(ChatBot &&source) {
   _rootNode = source._rootNode;
   _chatLogic = source._chatLogic;
   source.invalidateDataHandles();
+  _chatLogic->SetChatbotHandle(this);
 }
 // Move assignment constructor
 ChatBot &ChatBot::operator=(ChatBot &&source) {
@@ -87,13 +88,8 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
   _rootNode = source._rootNode;
   _chatLogic = source._chatLogic;
   source.invalidateDataHandles();
+  _chatLogic->SetChatbotHandle(this);
 }
-
-//// STUDENT CODE
-////
-
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
   // loop over all edges and keywords and compute Levenshtein distance to query
