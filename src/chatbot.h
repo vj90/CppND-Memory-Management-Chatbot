@@ -38,12 +38,6 @@ class ChatBot {
   // Move assignment constructor
   ChatBot &operator=(ChatBot &&source);
 
-  //// STUDENT CODE
-  ////
-
-  ////
-  //// EOF STUDENT CODE
-
   // getters / setters
   void SetCurrentNode(GraphNode *node);
   void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }

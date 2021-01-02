@@ -11,6 +11,7 @@
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot() {
   // invalidate data handles
+  std::cout << "ChatBot Constructor without memory" << std::endl;
   _image = nullptr;
   _chatLogic = nullptr;
   _rootNode = nullptr;
@@ -50,14 +51,14 @@ void ChatBot::deleteImageIfNotNull() {
 // Assignment constructor
 ChatBot &ChatBot::operator=(const ChatBot &source) {
   std::cout << "ChatBot Assignment Constructor" << std::endl;
-  if (this == &source) {
-    return *this;
+  if (this != &source) {
+    deleteImageIfNotNull();
+    _image = new wxBitmap();
+    *_image = *(source._image);
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
   }
-  deleteImageIfNotNull();
-  _image = new wxBitmap();
-  *_image = *(source._image);
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
+  return *this;
 }
 
 // Copy constructor
@@ -80,15 +81,15 @@ ChatBot::ChatBot(ChatBot &&source) {
 // Move assignment constructor
 ChatBot &ChatBot::operator=(ChatBot &&source) {
   std::cout << "ChatBot Move Assignment Constructor" << std::endl;
-  if (this == &source) {
-    return *this;
+  if (this != &source) {
+    deleteImageIfNotNull();
+    _image = source._image;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    source.invalidateDataHandles();
+    _chatLogic->SetChatbotHandle(this);
   }
-  deleteImageIfNotNull();
-  _image = source._image;
-  _rootNode = source._rootNode;
-  _chatLogic = source._chatLogic;
-  source.invalidateDataHandles();
-  _chatLogic->SetChatbotHandle(this);
+  return *this;
 }
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {

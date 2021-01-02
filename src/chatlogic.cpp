@@ -11,31 +11,9 @@
 #include "graphedge.h"
 #include "graphnode.h"
 
-ChatLogic::ChatLogic() {
-  //// STUDENT CODE
-  ////
+ChatLogic::ChatLogic() {}
 
-  // create instance of chatbot
-  _chatBot = new ChatBot("../images/chatbot.png");
-
-  // add pointer to chatlogic so that chatbot answers can be passed on to the
-  // GUI
-  _chatBot->SetChatLogicHandle(this);
-
-  ////
-  //// EOF STUDENT CODE
-}
-
-ChatLogic::~ChatLogic() {
-  //// STUDENT CODE
-  ////
-
-  // delete chatbot instance
-  delete _chatBot;
-
-  ////
-  //// EOF STUDENT CODE
-}
+ChatLogic::~ChatLogic() {}
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens,
@@ -183,9 +161,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
     return;
   }
 
-  //// STUDENT CODE
-  ////
-
   // identify root node
   GraphNode *rootNode = nullptr;
   for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it) {
@@ -199,12 +174,14 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
     }
   }
 
-  // add chatbot to graph root node
-  _chatBot->SetRootNode(rootNode);
-  rootNode->MoveChatbotHere(_chatBot);
-
-  ////
-  //// EOF STUDENT CODE
+  // create and add chatbot to graph root node
+  std::cout << "\ncreating chatbot\n";
+  ChatBot chatBot("../images/chatbot.png");
+  // std::unique_ptr<ChatBot>chatBot (new ChatBot("../images/chatbot.png"));
+  chatBot.SetChatLogicHandle(this);
+  _chatBot = &chatBot;
+  chatBot.SetRootNode(rootNode);
+  rootNode->MoveChatbotHere(std::move(chatBot));
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog) {
