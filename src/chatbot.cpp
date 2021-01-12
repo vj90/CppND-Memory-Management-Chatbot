@@ -52,8 +52,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source) {
   std::cout << "ChatBot Assignment Constructor" << std::endl;
   if (this != &source) {
     deleteImageIfNotNull();
-    _image = new wxBitmap();
-    *_image = *(source._image);
+    _image = new wxBitmap(*(source._image));
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
   }
